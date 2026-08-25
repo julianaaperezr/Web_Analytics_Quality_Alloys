@@ -28,3 +28,27 @@ head(financials)
 # Muestra la estructura de la base y el tipo de cada variable 
 str(weekly_visits)
 str(financials)
+
+# Identificacion de los periodos del caso
+weekly_visits
+
+# PREGUNTA 1: Graficos de las variables a traves del tiempo
+# Unique Visits
+ggplot(weekly_visits, aes(x = `Week (2008-2009)`, y = `Unique Visits`)) +
+  geom_col() +
+  ggtitle("Unique Visits over Time")
+
+# Revenue
+ggplot(financials, aes(x = `Week (2008-2009)`, y = Revenue)) +
+  geom_col() +
+  ggtitle("Revenue over Time")
+
+# Profit
+ggplot(financials, aes(x = `Week (2008-2009)`, y = Profit)) +
+  geom_col() +
+  ggtitle("Profit over Time")
+
+# Lbs. Sold
+ggplot(financials, aes(x = `Week (2008-2009)`, y = `Lbs. Sold`)) +
+  geom_col() +
+  ggtitle("Lbs. Sold over Time")
