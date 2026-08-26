@@ -52,3 +52,72 @@ ggplot(financials, aes(x = `Week (2008-2009)`, y = Profit)) +
 ggplot(financials, aes(x = `Week (2008-2009)`, y = `Lbs. Sold`)) +
   geom_col() +
   ggtitle("Lbs. Sold over Time")
+
+# PREGUNTA 2: Estadisticas descriptivas por periodo
+datos_analisis <- data.frame(
+  Visits = weekly_visits$Visits,
+  Unique_Visits = weekly_visits$`Unique Visits`,
+  Revenue = financials$Revenue,
+  Profit = financials$Profit,
+  Lbs_Sold = financials$`Lbs. Sold`
+)
+
+datos_analisis
+
+# Identificacion de los 4 periodos
+# En la variable periodo se asigno cada grupo de filas segun los periodos indicados en el excel
+# La variable Periodo, le indica a R a cual etapa pertenece cada observacion 
+datos_analisis$Periodo <- NA
+
+datos_analisis$Periodo[1:14] <- "Pre Promotion"
+datos_analisis$Periodo[15:35] <- "Initial Shakedown"
+datos_analisis$Periodo[36:52] <- "Promotion"
+datos_analisis$Periodo[53:66] <- "Post Promotion"
+
+datos_analisis
+
+# Para contar cuantas observaciones hay en cada categoria 
+table(datos_analisis$Periodo)
+
+# Estadisticas descriptivas
+estadisticas <- datos_analisis %>%
+  group_by(Periodo) %>%
+  summarize(
+    # Estadisticas descriptivas de Visits
+    media_visits = mean(Visits),
+    mediana_visits = median(Visits),
+    desviacion_visits = sd(Visits),
+    minimo_visits = min(Visits),
+    maximo_visits = max(Visits),
+    
+    # Estadisticas descriptivas de Unique Visits 
+    media_unique = mean(Unique_Visits),
+    mediana_unique = median(Unique_Visits),
+    desviacion_unique = sd(Unique_Visits),
+    minimo_unique = min(Unique_Visits),
+    maximo_unique = max(Unique_Visits),
+    
+    # Estadisticas descriptivas de Revenue
+    media_revenue = mean(Revenue),
+    mediana_revenue = median(Revenue),
+    desviacion_revenue = sd(Revenue),
+    minimo_revenue = min(Revenue),
+    maximo_revenue = max(Revenue),
+    
+    # Estadisticas descriptivas de Profit
+    media_profit = mean(Profit),
+    mediana_profit = median(Profit),
+    desviacion_profit = sd(Profit),
+    minimo_profit = min(Profit),
+    maximo_profit = max(Profit),
+    
+    # Estadisticas descriptivas de Lbs. Sold
+    media_lbs = mean(Lbs_Sold),
+    mediana_lbs = median(Lbs_Sold),
+    desviacion_lbs = sd(Lbs_Sold),
+    minimo_lbs = min(Lbs_Sold),
+    maximo_lbs = max(Lbs_Sold)
+  )
+
+# Para poder visualizar las variables y los periodos para hacer la comparacion 
+view(estadisticas)
