@@ -51,7 +51,7 @@ ggplot(financials, aes(x = `Week (2008-2009)`, y = Profit)) +
 # Lbs. Sold
 ggplot(financials, aes(x = `Week (2008-2009)`, y = `Lbs. Sold`)) +
   geom_col() +
-  ggtitle("Lbs. Sold over Time")
+  ggtitle("Pounds Sold over Time")
 
 # PREGUNTA 2: Estadisticas descriptivas por periodo
 datos_analisis <- data.frame(
@@ -121,3 +121,38 @@ estadisticas <- datos_analisis %>%
 
 # Para poder visualizar las variables y los periodos para hacer la comparacion 
 view(estadisticas)
+
+# PREGUNTA 3: Graficos de las medias por periodo
+# Para organizar los periodos temporalmente y no alfabeticamente 
+estadisticas$Periodo <- factor(
+  estadisticas$Periodo,
+  levels = c("Initial Shakedown",
+             "Pre Promotion",
+             "Promotion",
+             "Post Promotion")
+)
+
+# Para Mean Visits por periodo
+ggplot(estadisticas, aes(x = Periodo, y = media_visits)) +
+  geom_col() +
+  ggtitle("Mean Visits by Period")
+
+# Para Mean Unique Visits por periodo
+ggplot(estadisticas, aes(x = Periodo, y = media_unique)) +
+  geom_col() +
+  ggtitle("Mean Unique Visits by Period")
+
+# Para Mean Revenue por periodo
+ggplot(estadisticas, aes(x = Periodo, y = media_revenue)) +
+  geom_col() +
+  ggtitle("Mean Revenue by Period")
+
+# Para Mean Profit por periodo
+ggplot(estadisticas, aes(x = Periodo, y = media_profit)) +
+  geom_col() +
+  ggtitle("Mean Profit by Period")
+
+# Para Mean Lbs. Sold por periodo
+ggplot(estadisticas, aes(x = Periodo, y = media_lbs)) +
+  geom_col() +
+  ggtitle("Mean Lbs. Sold by Period")
