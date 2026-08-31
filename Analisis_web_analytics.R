@@ -156,3 +156,72 @@ ggplot(estadisticas, aes(x = Periodo, y = media_profit)) +
 ggplot(estadisticas, aes(x = Periodo, y = media_lbs)) +
   geom_col() +
   ggtitle("Mean Lbs. Sold by Period")
+
+# Pregunta 4: resumen de los resultados 
+
+# Seleccionamos las medias de las variables para compararlas entre los periodos
+medias_periodo <- estadisticas %>%
+  select(Periodo, media_visits, media_unique, media_revenue,
+         media_profit, media_lbs)
+
+# se muestra la tabla con las medias
+view(medias_periodo)
+
+# PREGUNTA 5: Relacion entre Revenue y Lbs. Sold
+
+# Creamos un grafico de dispersion para observar la relacion
+# entre las libras vendidas y los ingresos
+ggplot(datos_analisis, aes(x = Lbs_Sold, y = Revenue)) +
+  geom_point() +
+  ggtitle("Revenue vs Pounds Sold") +
+  xlab("Pounds Sold") +
+  ylab("Revenue")
+
+# Calculamos la correlacion entre Revenue y Lbs. Sold
+cor_revenue_lbs <- cor(datos_analisis$Revenue, datos_analisis$Lbs_Sold)
+
+# Mostramos la correlacion que calculamos en la linea anterior 
+cor_revenue_lbs
+
+# PREGUNTA 6: Relacion entre Revenue y Visits
+
+# Creamos un grafico de dispersion entre visitas e ingresos
+ggplot(datos_analisis, aes(x = Visits, y = Revenue)) +
+  geom_point() +
+  ggtitle("Revenue vs Visits") +
+  xlab("Visits") +
+  ylab("Revenue")
+
+# Calculamos la correlacion entre Revenue y Visits
+cor_revenue_visits <- cor(datos_analisis$Revenue, datos_analisis$Visits)
+
+# Mostramos la correlacion
+cor_revenue_visits
+
+# PREGUNTA 7: Relacion entre otras variables
+
+# Creamos un grafico para comparar Visits y Lbs. Sold
+ggplot(datos_analisis, aes(x = Visits, y = Lbs_Sold)) +
+  geom_point() +
+  ggtitle("Visits vs Pounds Sold") +
+  xlab("Visits") +
+  ylab("Pounds Sold")
+
+# Calculamos la correlacion entre Visits y Lbs. Sold
+cor_visits_lbs <- cor(datos_analisis$Visits, datos_analisis$Lbs_Sold)
+
+# Mostramos la correlacion
+cor_visits_lbs
+
+# Creamos un grafico para comparar Unique Visits y Revenue
+ggplot(datos_analisis, aes(x = Unique_Visits, y = Revenue)) +
+  geom_point() +
+  ggtitle("Revenue vs Unique Visits") +
+  xlab("Unique Visits") +
+  ylab("Revenue")
+
+# Calculamos la correlacion entre Unique Visits y Revenue
+cor_revenue_unique <- cor(datos_analisis$Revenue, datos_analisis$Unique_Visits)
+
+# Mostramos la correlacion
+cor_revenue_unique
