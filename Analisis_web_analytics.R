@@ -36,12 +36,24 @@ weekly_visits
 # Unique Visits
 ggplot(weekly_visits, aes(x = `Week (2008-2009)`, y = `Unique Visits`)) +
   geom_col() +
-  ggtitle("Unique Visits over Time")
+  ggtitle("Unique Visits over Time") +
+  scale_x_discrete(breaks = weekly_visits$`Week (2008-2009)`[
+    seq(1, nrow(weekly_visits), by = 5)
+  ]) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
 
 # Revenue
 ggplot(financials, aes(x = `Week (2008-2009)`, y = Revenue)) +
   geom_col() +
-  ggtitle("Revenue over Time")
+  ggtitle("Revenue over Time") +
+  scale_x_discrete(breaks = financials$`Week (2008-2009)`[
+    seq(1, nrow(financials), by = 5)
+  ]) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
 
 # Profit
 ggplot(financials, aes(x = `Week (2008-2009)`, y = Profit)) +
